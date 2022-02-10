@@ -1,5 +1,6 @@
 import groovy.json.JsonSlurper;
-import groovy.json.JsonOutput
+import groovy.json.JsonOutput;
+import groovy.json.JsonBuilder;
 
 def contacts = '''
 {
@@ -21,15 +22,19 @@ def contacts = '''
       "number": "0123-4567-8910"
     }
   ]
+}'''
+
+def jsonSlurper = new JsonSlurper().parseText(contacts);
+def builder = new JsonBuilder(jsonSlurper)
+
+def rdm = UUID;
+println rdm.randomUUID().toString();
+
+for (int i=0; i <= 10; i++){
+  // println builder.content.phoneNumbers[i];
+  builder.content.phoneNumbers = rdm.randomUUID().toString();
 }
-'''
-
-def jsonSlurper = new JsonSlurper();
-def json = jsonSlurper.parseText(contacts);
-json.phoneNumbers[0].type = '+81';
-
-println json.phoneNumbers[0].type;
-
+println(builder.toPrettyString())
 
 // def jsonSlurper = new JsonSlurper()
 // def object = jsonSlurper.parseText('{ "name": "John Doe" } /* some comment */')
